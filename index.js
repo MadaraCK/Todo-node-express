@@ -1,15 +1,20 @@
-const express =  require('express');
+const express = require('express');
 const app = express();
-const  apiRouter = require('./routes/api');
-const {port} = require('./config')
-//db
+const {port} = require('./config');
+const apiRouter = require('./routes/api');
+const bodyParser = require('body-parser');
 
+//db
 require('./db/mongoose')
+
 // routes
-app.use('/', apiRouter)
+app.use('/api/', apiRouter)
+
+// parser
+app.use(bodyParser.json())
 
 //server
-app.listen(port, function (){
+app.listen(port, function () {
     console.log('serwer słucha... http:' + port)
 })
 
